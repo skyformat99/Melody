@@ -10,6 +10,7 @@
 #define melody_h
 
 #include <stdio.h>
+#include <stdbool.h>
 
 
 #define URL_LENGTH 128;
@@ -35,47 +36,56 @@ typedef struct callback{
 } callback;
 
 typedef struct task {
-    long taskId;
-    char * taskName;
-    callback * callback;
-    int cycleNum;
+	long taskId;
+	char * taskName;
+	callback * callback;
+	int cycleNum;
 } task;
 
+typedef struct taskSlot{
+	task * front;         /*头指针*/
+	task * rear;          /*尾指针*/
+	int taskCount;        /*槽的任务总数*/
+} taskSolt  ;
+
+
+
 typedef struct cycle{
-    task * front;         /*头指针*/
-    task * rear;          /*尾指针*/
-    int taskCount;        /*槽的任务总数*/
-} cycle  ;
+	int currentSlot;  //当前指向的槽
+	long currentCycleNum;
+
+}cycle;
+
 
 /*操作 初始化一个任务槽                                                 */
 /*前置条件 pq指向cycle其中一个槽的队列                                  */
 /*后置条件 pq被初始化为空                                               */
-void InitializeTaskSolt (cycle *pc)
+void InitializeTaskSolt (cycle *pc);
 
 /*操作 初始化队列                                                       */
 /*前置条件 pq指向cycle其中一个槽的队列                                  */
 /*后置条件 pq被初始化为空                                               */
-void InitializeTaskSolt (cycle *pc)
+void InitializeTaskSolt (cycle *pc);
 
 
 /*操作 检查任务槽是否已满                                               */
 /*前置条件 pq指向之前被初始化的队列                                     */
 /*后置条件 如果队列为空 空返回ture,否则返回false                        */
-bool addTask (task *pt cycle *pc)
+bool addTask (task *pt ,cycle *pc);
 
 /*操作   删除任务                                                       */
 /*前置条件 pq指向之前被初始化的队列                                     */
 /*后置条件 如果队列                        */
-bool deleteTask (task *pt cycle *pc)
+bool deleteTask (task *pt ,cycle *pc);
 
 /*操作 查看任务槽的任务数                                               */
 /*前置条件 pq指向之前被初始化的队列                                     */
 /*后置条件 如果队列为空 空返回ture,否则返回false                        */
-bool taskSoltCount (const cycle *pc)
+bool taskSoltCount (const cycle *pc);
 
 /*操作 检查队列是否已满 暂时用不着                                      */
 /*前置条件 pq指向之前被初始化的队列                                     */
 /*后置条件 如果队列已满则返回true,否则返回false                         */
-bool taskSoltIsFull (const cycle *pc)
+bool taskSoltIsFull (const cycle *pc);
 
 #endif /* melody_h */
