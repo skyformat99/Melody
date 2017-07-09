@@ -45,13 +45,13 @@ typedef struct task {
 typedef struct taskSlot{
 	task * front;         /*头指针*/
 	task * rear;          /*尾指针*/
-	int taskCount;        /*槽的任务总数*/
+	long taskCount;        /*槽的任务总数*/
 } taskSolt  ;
 
 
 
 typedef struct cycle{
-	int currentSlot;  //当前指向的槽
+	taskSolt ht;//当前指向的槽
 	long currentCycleNum;
 
 }cycle;
